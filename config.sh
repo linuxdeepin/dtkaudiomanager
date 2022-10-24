@@ -26,8 +26,8 @@ ChangeName() {
 ChangeNamespace() {
     echo "begin config namespace: $1..."
     name=$1
-    sed -i "s/Demo/${name}/g" include/namespace.h
-    sed -i "s/DDEMO/D${name^^}/g" include/*.h src/*.cpp tests/*.cpp
+    sed -i "s/Demo/${name}/g" include/namespace.h docs/CMakeLists.txt
+    sed -i "s/DDEMO/D${name^^}/g" include/*.h src/*.cpp tests/*.cpp docs/CMakeLists.txt
     echo "end config namespace"
 }
 

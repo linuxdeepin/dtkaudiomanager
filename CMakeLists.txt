@@ -11,8 +11,8 @@ set(BIN_NAME dtkaudiomanager)
 
 project(${BIN_NAME}
     LANGUAGES CXX
-    HOMEPAGE_URL https://github.com/linuxdeepin/dtk-template
-    DESCRIPTION "dtk library template"
+    HOMEPAGE_URL https://github.com/linuxdeepin/dtkaudiomanager
+    DESCRIPTION "Qt-based development library for audio manager on Deepin"
     VERSION ${VERSION}
 )
 
@@ -27,6 +27,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -Wall -Wextra")
 set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "-Wl,--as-needed")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(DAUDIO_MANAGER_PLUGIN_DIR ${CMAKE_INSTALL_FULL_LIBDIR}/${BIN_NAME}/plugins)
+add_definitions(-DDAUDIO_MANAGER_PLUGIN_DIR="${DAUDIO_MANAGER_PLUGIN_DIR}")
 # Install settings
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX /usr)
@@ -40,9 +42,11 @@ else ()
 endif ()
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui DBus)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core DBus)
 
 add_subdirectory(src)
+add_subdirectory(dde-daemon-plugin)
+add_subdirectory(examples)
 
 set(BUILD_DOCS ON CACHE BOOL "Generate doxygen-based documentation")
 find_package(Doxygen)

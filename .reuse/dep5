@@ -14,9 +14,9 @@ Copyright: None
 License: CC0-1.0
 
 # docs
-Files: docs/*.md
-Copyright: None
-License: CC0-1.0
+Files: *dox *.md
+Copyright: UnionTech Software Technology Co., Ltd.
+License: CC-BY-4.0
 
 # debian
 Files: debian/*
@@ -28,8 +28,9 @@ Files: .github/* .gitignore
 Copyright: None
 License: CC0-1.0
 
-# cpp-stub
-Files: tests/3rdparty/cpp-stub/*
-Copyright: None
-License: MIT
+# json
+Files: dde-daemon-plugin/daemonaudio.json
+copyright: UnionTech Software Technology Co., Ltd.
+License: LGPL-3.0-or-later
+
 

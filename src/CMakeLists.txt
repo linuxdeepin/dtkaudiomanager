@@ -4,18 +4,49 @@
 
 set(BIN_NAME ${CMAKE_PROJECT_NAME})
 
-file(GLOB_RECURSE INCLUDE_FILES "../include/*.h")
+file(GLOB_RECURSE INCLUDE_PRIVATE_FILES
+    "../include/daudioport_p.h"
+    "../include/daudiocard_p.h"
+    "../include/daudiomanager_p.h"
+    "../include/daudiodevice_p.h"
+    "../include/daudiostream_p.h"
+    "../include/daudiofactory_p.h"
+    "../include/daudioplugin_p.h"
+)
+file(GLOB_RECURSE INCLUDE_FILES
+    "../include/DAudioPort"
+    "../include/DAudioCard"
+    "../include/DAudioManager"
+    "../include/DAudioDevice"
+    "../include/DAudioStream"
+    "../include/dtkaudiomanager_global.h"
+    "../include/daudioport.h"
+    "../include/daudiocard.h"
+    "../include/daudiomanager.h"
+    "../include/daudiodevice.h"
+    "../include/daudiostream.h"
+)
 file(GLOB_RECURSE SRCS
-    "./*.h"
-    "./*.cpp"
+    "./daudioport.cpp"
+    "./daudiocard.cpp"
+    "./daudiofactory.cpp"
+    "./daudioplugin.cpp"
+    "./daudiomanager.cpp"
+    "./daudiodevice.cpp"
+    "./daudiostream.cpp"
+    "./dbus/*.h"
+    "./dbus/*.cpp"
 )
 
 add_library(${BIN_NAME} SHARED
     ${INCLUDE_FILES}
+    ${INCLUDE_PRIVATE_FILES}
     ${SRCS}
 )
 
 include_directories(../include)
+
+add_definitions(-DLIBDTKAUDIOMANAGER_LIBRARY)
 
 set_target_properties(${BIN_NAME} PROPERTIES
     VERSION ${CMAKE_PROJECT_VERSION}
@@ -23,21 +54,14 @@ set_target_properties(${BIN_NAME} PROPERTIES
 
 target_compile_definitions(${BIN_NAME} PRIVATE VERSION="${CMAKE_PROJECT_VERSION}")
 
-find_package(PkgConfig REQUIRED)
-pkg_search_module(RSVG2 REQUIRED librsvg-2.0)
-
 target_include_directories(${BIN_NAME} PUBLIC
     Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Gui
     Qt${QT_VERSION_MAJOR}::DBus
-    ${RSVG2_INCLUDE_DIRS}
 )
 
 target_link_libraries(${BIN_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Gui
     Qt${QT_VERSION_MAJOR}::DBus
-    ${RSVG2_LIBRARIES}
 )
 
 install(FILES ${INCLUDE_FILES} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${BIN_NAME})

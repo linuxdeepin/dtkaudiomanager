@@ -8,6 +8,7 @@ set (DOXYGEN_GENERATE_HTML "YES" CACHE STRING "Doxygen HTML output")
 set (DOXYGEN_GENERATE_XML "NO" CACHE STRING "Doxygen XML output")
 set (DOXYGEN_GENERATE_QHP "YES" CACHE STRING "Doxygen QHP output")
 set (DOXYGEN_FILE_PATTERNS *.cpp *.h *.md *.zh_CN.dox CACHE STRING "Doxygen File Patterns")
+set(DOXYGEN_EXCLUDE_PATTERNS *_p.h)
 set (DOXYGEN_PROJECT_NUMBER ${CMAKE_PROJECT_VERSION} CACHE STRING "") # Should be the same as this project is using.
 set (DOXYGEN_EXTRACT_STATIC YES)
 set (DOXYGEN_OUTPUT_LANGUAGE "Chinese")
@@ -21,9 +22,9 @@ set (DOXYGEN_TAGFILES "qtcore.tags=qthelp://doc.qt.io/qt-5/" CACHE STRING "Doxyg
 set (DOXYGEN_MACRO_EXPANSION "YES")
 set (DOXYGEN_EXPAND_ONLY_PREDEF "YES")
 set (DOXYGEN_PREDEFINED
-    "\"DDEMO_BEGIN_NAMESPACE=namespace Dtk { namespace Demo {\""
-    "\"DDEMO_END_NAMESPACE=}}\""
-    "\"DDEMO_USE_NAMESPACE=using namespace Dtk::Demo;\""
+    "DAUDIOMANAGER_BEGIN_NAMESPACE=namespace Dtk { namespace AudioManager {"
+    "DAUDIOMANAGER_END_NAMESPACE=}}"
+    "DAUDIOMANAGER_USE_NAMESPACE=using namespace Dtk::AudioManager;"
 )
 
 doxygen_add_docs (doxygen
