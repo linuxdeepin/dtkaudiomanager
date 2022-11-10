@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include  <dbus/ddbusinterface.h>
 #include "dtkaudiomanager_global.h"
 
 #include <QDBusInterface>
 #include <QObject>
+#include <DDBusInterface>
 
 #include <QLoggingCategory>
 
@@ -17,6 +17,7 @@ Q_DECLARE_LOGGING_CATEGORY(amLog)
 DAUDIOMANAGER_END_NAMESPACE
 
 namespace DDaemonInternal {
+using DTK_CORE_NAMESPACE::DDBusInterface;
 #ifdef USE_FAKE_INTERFACE
 static const QString AudioServiceName("com.deepin.daemon.FakeAudio");
 static const QString AudioPath("/com/deepin/daemon/FakeAudio");

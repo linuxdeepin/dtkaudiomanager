@@ -8,8 +8,13 @@
 
 #include <QDBusArgument>
 #include <QDebug>
+#include <QDBusReply>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DTK_CORE_NAMESPACE::DExpected;
+using DTK_CORE_NAMESPACE::DUnexpected;
+using DTK_CORE_NAMESPACE::DError;
+
 DDAemonStreamInterface::DDAemonStreamInterface(DDBusInterface *inter, DPlatformAudioStream *owner)
     : m_inter(inter)
     , m_owner(owner)
@@ -53,24 +58,40 @@ bool DDAemonStreamInterface::supportFade() const
     return qdbus_cast<bool>(m_inter->property("SupportFade"));
 }
 
-void DDAemonStreamInterface::setMute(bool mute)
+DExpected<void> DDAemonStreamInterface::setMute(bool mute)
 {
-    m_inter->call("SetMute", mute);
+    QDBusReply<void> reply = m_inter->call("SetMute", mute);
+    if (!reply.isValid()) {
+        return DUnexpected<>{DError{reply.error().type(), reply.error().message()}};
+    }
+    return {};
 }
 
-void DDAemonStreamInterface::setFade(double fade)
+DExpected<void> DDAemonStreamInterface::setFade(double fade)
 {
-    m_inter->call("SetFade", fade);
+    QDBusReply<void> reply = m_inter->call("SetFade", fade);
+    if (!reply.isValid()) {
+        return DUnexpected<>{DError{reply.error().type(), reply.error().message()}};
+    }
+    return {};
 }
 
-void DDAemonStreamInterface::setVolume(double volume)
+DExpected<void> DDAemonStreamInterface::setVolume(double volume)
 {
-    m_inter->call("SetVolume", volume, m_owner->isPlay());
+    QDBusReply<void> reply = m_inter->call("SetVolume", volume, m_owner->isPlay());
+    if (!reply.isValid()) {
+        return DUnexpected<>{DError{reply.error().type(), reply.error().message()}};
+    }
+    return {};
 }
 
-void DDAemonStreamInterface::setBalance(double balance)
+DExpected<void> DDAemonStreamInterface::setBalance(double balance)
 {
-    m_inter->call("SetBalance", balance, m_owner->isPlay());
+    QDBusReply<void> reply = m_inter->call("SetBalance", balance, m_owner->isPlay());
+    if (!reply.isValid()) {
+        return DUnexpected<>{DError{reply.error().type(), reply.error().message()}};
+    }
+    return {};
 }
 
 DDaemonInputStream::DDaemonInputStream(const QString &path, DPlatformAudioOutputDevice *parent)
@@ -118,24 +139,24 @@ bool DDaemonInputStream::supportFade() const
     return m_interface->supportFade();
 }
 
-void DDaemonInputStream::setMute(bool mute)
+DExpected<void> DDaemonInputStream::setMute(bool mute)
 {
-    m_interface->setMute(mute);
+    return m_interface->setMute(mute);
 }
 
-void DDaemonInputStream::setFade(double fade)
+DExpected<void> DDaemonInputStream::setFade(double fade)
 {
-    m_interface->setFade(fade);
+    return m_interface->setFade(fade);
 }
 
-void DDaemonInputStream::setVolume(double volume)
+DExpected<void> DDaemonInputStream::setVolume(double volume)
 {
-    m_interface->setVolume(volume);
+    return m_interface->setVolume(volume);
 }
 
-void DDaemonInputStream::setBalance(double balance)
+DExpected<void> DDaemonInputStream::setBalance(double balance)
 {
-    m_interface->setBalance(balance);
+    return m_interface->setBalance(balance);
 }
 
 DDaemonOutputStream::DDaemonOutputStream(const QString &path, DPlatformAudioInputDevice *parent)
@@ -183,24 +204,24 @@ bool DDaemonOutputStream::supportFade() const
     return m_interface->supportFade();
 }
 
-void DDaemonOutputStream::setMute(bool mute)
+DExpected<void> DDaemonOutputStream::setMute(bool mute)
 {
-    m_interface->setMute(mute);
+    return m_interface->setMute(mute);
 }
 
-void DDaemonOutputStream::setFade(double fade)
+DExpected<void> DDaemonOutputStream::setFade(double fade)
 {
-    m_interface->setFade(fade);
+    return m_interface->setFade(fade);
 }
 
-void DDaemonOutputStream::setVolume(double volume)
+DExpected<void> DDaemonOutputStream::setVolume(double volume)
 {
-    m_interface->setVolume(volume);
+    return m_interface->setVolume(volume);
 }
 
-void DDaemonOutputStream::setBalance(double balance)
+DExpected<void> DDaemonOutputStream::setBalance(double balance)
 {
-    m_interface->setBalance(balance);
+    return m_interface->setBalance(balance);
 }
 
 DAUDIOMANAGER_END_NAMESPACE

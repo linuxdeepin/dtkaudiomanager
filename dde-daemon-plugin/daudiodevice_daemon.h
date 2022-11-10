@@ -7,12 +7,15 @@
 
 #include "dtkaudiomanager_global.h"
 #include "daudiodevice_p.h"
-#include "dbus/ddbusinterface.h"
 
 #include <QDBusArgument>
 #include <QObject>
+#include <DDBusInterface>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DTK_CORE_NAMESPACE::DDBusInterface;
+using DTK_CORE_NAMESPACE::DExpected;
 class DAudioCard;
 class DAudioDevicePrivate;
 struct DAudioPortInfo_p {
@@ -43,10 +46,10 @@ public:
     QList<QString> ports() const;
 
 public Q_SLOTS:
-    void setMute(bool mute);
-    void setFade(double fade);
-    void setVolume(double volume);
-    void setBalance(double balance);
+    DExpected<void> setMute(bool mute);
+    DExpected<void> setFade(double fade);
+    DExpected<void> setVolume(double volume);
+    DExpected<void> setBalance(double balance);
 
 Q_SIGNALS:
     void MuteChanged(bool mute);
@@ -86,10 +89,10 @@ public:
 
     void compareAndDestroyStreams(const QList<QString> &nowStreams);
 public Q_SLOTS:
-    virtual void setMute(bool mute) override;
-    virtual void setFade(double fade) override;
-    virtual void setVolume(double volume) override;
-    virtual void setBalance(double balance) override;
+    virtual DExpected<void> setMute(bool mute) override;
+    virtual DExpected<void> setFade(double fade) override;
+    virtual DExpected<void> setVolume(double volume) override;
+    virtual DExpected<void> setBalance(double balance) override;
 
 private:
     void ensureMeter();
@@ -123,16 +126,16 @@ public:
     void compareAndDestroyStreams(const QList<QString> &nowStreams);
 
 public Q_SLOTS:
-    virtual void setMute(bool mute) override;
-    virtual void setFade(double fade) override;
-    virtual void setVolume(double volume) override;
-    virtual void setBalance(double balance) override;
+    virtual DExpected<void> setMute(bool mute) override;
+    virtual DExpected<void> setFade(double fade) override;
+    virtual DExpected<void> setVolume(double volume) override;
+    virtual DExpected<void> setBalance(double balance) override;
 
 private:
     QScopedPointer<DDAemonDeviceInterface> m_interface;
 };
 DAUDIOMANAGER_END_NAMESPACE
 
-Q_DECLARE_METATYPE(DTK_AUDIOMANAGER_NAMESPACE::DAudioPortInfo_p);
+Q_DECLARE_METATYPE(DTK_AUDIOMANAGER_NAMESPACE::DAudioPortInfo_p)
 
 #endif

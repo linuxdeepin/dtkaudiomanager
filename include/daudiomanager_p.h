@@ -12,8 +12,11 @@
 
 #include <QObject>
 #include <QSharedDataPointer>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+DCORE_USE_NAMESPACE
+
 class DPlatformAudioCard;
 class DPlatformAudioInputDevice;
 class DPlatformAudioOutputDevice;
@@ -40,8 +43,8 @@ public:
     void removeOutputDevice(const QString &deviceName);
 
 public Q_SLOTS:
-    virtual void setIncreaseVolume(bool increaseVolume) = 0;
-    virtual void setReduceNoise(bool reduceNoise) = 0;
+    virtual DExpected<void> setIncreaseVolume(bool increaseVolume) = 0;
+    virtual DExpected<void> setReduceNoise(bool reduceNoise) = 0;
 
 Q_SIGNALS:
     void deviceAdded(const QString &name, const bool isInputDevice);

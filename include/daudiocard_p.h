@@ -8,10 +8,14 @@
 #include "daudioport.h"
 #include "daudiocard.h"
 #include "daudioport_p.h"
+#include "dtkcore_global.h"
 
 #include <QObject>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+DCORE_USE_NAMESPACE
+
 class DPlatformAudioPort;
 class DAudioPort;
 class DAudioCard;
@@ -63,7 +67,7 @@ public:
     virtual QStringList modeOptions() const = 0;
 
 public Q_SLOTS:
-    virtual void setMode(const QString &mode) = 0;
+    virtual DExpected<void> setMode(const QString &mode) = 0;
 
 Q_SIGNALS:
     void modeChanged(const QString &mode);

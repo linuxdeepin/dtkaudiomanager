@@ -6,11 +6,13 @@
 #define DAUDIOCARD_H
 
 #include <dtkaudiomanager_global.h>
+#include <dexpected.h>
 
 #include <QObject>
 #include <QSharedPointer>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DCORE_NAMESPACE::DExpected;
 class DAudioPort;
 class DPlatformAudioCard;
 using DAudioPortPtr = QSharedPointer<DAudioPort>;
@@ -62,7 +64,7 @@ public:
     virtual DAudioCard::Type type() const override;
 
 public Q_SLOTS:
-    void setMode(QString mode);
+    DExpected<void> setMode(QString &mode);
 
 Q_SIGNALS:
     void modeChanged(QString mode);

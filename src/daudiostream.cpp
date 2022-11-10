@@ -10,6 +10,9 @@
 #include <QDebug>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DCORE_NAMESPACE::DExpected;
+using DCORE_NAMESPACE::DUnexpected;
+using DCORE_NAMESPACE::DError;
 
 DAudioStream::DAudioStream(DPlatformAudioStream *d, DAudioDevice *parent)
     : QObject (parent)
@@ -85,24 +88,28 @@ void DAudioStream::setIsPlay(bool isPlay)
     Q_EMIT isPlayChanged(isPlay);
 }
 
-void DAudioStream::setMute(bool mute)
+DExpected<void> DAudioStream::setMute(bool mute)
 {
     d->setMute(mute);
+    return {};
 }
 
-void DAudioStream::setFade(double fade)
+DExpected<void> DAudioStream::setFade(double fade)
 {
     d->setFade(fade);
+    return {};
 }
 
-void DAudioStream::setVolume(double volume)
+DExpected<void> DAudioStream::setVolume(double volume)
 {
     d->setVolume(volume);
+    return {};
 }
 
-void DAudioStream::setBalance(double balance)
+DExpected<void> DAudioStream::setBalance(double balance)
 {
     d->setBalance(balance);
+    return {};
 }
 
 DAudioInputStream::DAudioInputStream(DPlatformAudioInputStream *d, DAudioDevice *parent)

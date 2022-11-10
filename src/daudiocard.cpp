@@ -11,6 +11,9 @@
 #include <QDebug>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DCORE_NAMESPACE::DExpected;
+using DCORE_NAMESPACE::DUnexpected;
+using DCORE_NAMESPACE::DError;
 
 DAudioCard::DAudioCard(DPlatformAudioCard *d)
     : d(d)
@@ -79,9 +82,11 @@ DAudioCard::Type DAudioBluetoothCard::type() const
     return DAudioCard::Bluetooth;
 }
 
-void DAudioBluetoothCard::setMode(QString mode)
+DExpected<void> DAudioBluetoothCard::setMode(QString &mode)
+
 {
-    return dynamic_cast<DPlatformAudioBluetoothCard *>(d.data())->setMode(mode);
+    dynamic_cast<DPlatformAudioBluetoothCard *>(d.data())->setMode(mode);
+    return {};
 }
 
 DPlatformAudioCard::DPlatformAudioCard(QObject *parent)

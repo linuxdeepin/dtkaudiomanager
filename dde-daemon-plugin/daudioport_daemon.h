@@ -6,9 +6,9 @@
 #define DAUDIOPORT_DAEMON_H
 
 #include "daudioport_p.h"
-#include "dbus/ddbusinterface.h"
 
 #include <QObject>
+#include <DDBusInterface>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
 class DDaemonAudioPort : public DPlatformAudioPort

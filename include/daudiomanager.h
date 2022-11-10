@@ -8,10 +8,13 @@
 #include <dtkaudiomanager_global.h>
 #include <daudiocard.h>
 #include <daudiodevice.h>
+#include <dexpected.h>
 
 #include <QObject>
 #include <QSharedPointer>
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DCORE_NAMESPACE::DExpected;
+
 class DAudioCard;
 class DAudioInputDevice;
 class DAudioOutputDevice;
@@ -53,8 +56,8 @@ public:
     double maxVolume() const;
 
 public Q_SLOTS:
-    void setIncreaseVolume(bool increaseVolume);
-    void setReduceNoise(bool reduceNoise);
+    DExpected<void> setIncreaseVolume(bool increaseVolume);
+    DExpected<void> setReduceNoise(bool reduceNoise);
 
 Q_SIGNALS:
     void deviceAdded(const QString &name, const bool isInputDevice);

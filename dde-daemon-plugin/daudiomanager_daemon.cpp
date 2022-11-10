@@ -118,14 +118,16 @@ double DDaemonAudioManager::maxVolume() const
     return qdbus_cast<double>(m_inter->property("MaxUIVolume"));
 }
 
-void DDaemonAudioManager::setIncreaseVolume(bool increaseVolume)
+DExpected<void> DDaemonAudioManager::setIncreaseVolume(bool increaseVolume)
 {
     m_inter->setProperty("IncreaseVolume", increaseVolume);
+    return {};
 }
 
-void DDaemonAudioManager::setReduceNoise(bool reduceNoise)
+DExpected<void> DDaemonAudioManager::setReduceNoise(bool reduceNoise)
 {
     m_inter->setProperty("ReduceNoise", reduceNoise);
+    return {};
 }
 
 void DDaemonAudioManager::onPortEnableChanged(quint32 cardIndex, const QString &portName, bool enabled)

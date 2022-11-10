@@ -11,6 +11,9 @@
 #include <QLoggingCategory>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DCORE_NAMESPACE::DExpected;
+using DCORE_NAMESPACE::DUnexpected;
+using DCORE_NAMESPACE::DError;
 
 // daudiomanager log category
 #ifndef QT_DEBUG
@@ -180,14 +183,15 @@ double DAudioManager::maxVolume() const
     return d->maxVolume();
 }
 
-void DAudioManager::setIncreaseVolume(bool increaseVolume)
+DExpected<void> DAudioManager::setIncreaseVolume(bool increaseVolume)
 {
-    d->setIncreaseVolume(increaseVolume);
+    return d->setIncreaseVolume(increaseVolume);
 }
 
-void DAudioManager::setReduceNoise(bool reduceNoise)
+DExpected<void> DAudioManager::setReduceNoise(bool reduceNoise)
 {
     d->setReduceNoise(reduceNoise);
+    return {};
 }
 
 DAudioManagerPrivate::DAudioManagerPrivate(QObject *parent)

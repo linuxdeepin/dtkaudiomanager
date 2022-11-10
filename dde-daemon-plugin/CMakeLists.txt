@@ -46,13 +46,13 @@ set_target_properties(${BIN_NAME} PROPERTIES
 target_compile_definitions(${BIN_NAME} PRIVATE VERSION="${CMAKE_PROJECT_VERSION}")
 
 target_include_directories(${BIN_NAME} PUBLIC
-    Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::DBus
+    ${DtkCore_INCLUDE_DIRS}
 )
 
 target_link_libraries(${BIN_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::DBus
+    ${DtkCore_LIBRARIES}
 )
 
 install(TARGETS ${BIN_NAME} DESTINATION ${DAUDIO_MANAGER_PLUGIN_DIR})

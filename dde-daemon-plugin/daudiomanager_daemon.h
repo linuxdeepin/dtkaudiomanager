@@ -6,12 +6,16 @@
 #define DAUDIOMANAGER_DAEMON_H
 
 #include "daudiomanager_p.h"
-#include "dbus/ddbusinterface.h"
 
 #include <QDBusInterface>
 #include <QObject>
+#include <DDBusInterface>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DTK_CORE_NAMESPACE::DDBusInterface;
+using DTK_CORE_NAMESPACE::DExpected;
+
 
 class LIBDTKAUDIOMANAGERSHARED_EXPORT DDaemonAudioManager : public DAudioManagerPrivate
 {
@@ -28,8 +32,8 @@ public:
     virtual bool reduceNoise() const override;
     virtual double maxVolume() const override;
 public Q_SLOTS:
-    virtual void setIncreaseVolume(bool increaseVolume) override;
-    virtual void setReduceNoise(bool reduceNoise) override;
+    virtual DExpected<void> setIncreaseVolume(bool increaseVolume) override;
+    virtual DExpected<void> setReduceNoise(bool reduceNoise) override;
 
 Q_SIGNALS:
     void deviceAdded(const QString &name, const bool isInputDevice);

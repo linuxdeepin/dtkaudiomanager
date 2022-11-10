@@ -9,8 +9,12 @@
 
 #include <QDBusArgument>
 #include <QDebug>
+#include <QDBusReply>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DTK_CORE_NAMESPACE::DExpected;
+using DTK_CORE_NAMESPACE::DUnexpected;
+using DTK_CORE_NAMESPACE::DError;
 
 DDaemonAudioCard::DDaemonAudioCard(QObject *parent)
     : DPlatformAudioCard (parent)
@@ -45,8 +49,13 @@ QStringList DDaemonAudioBluetoothCard::modeOptions() const
     return qdbus_cast<QStringList>(m_inter->property("BluetoothAudioModeOpts"));
 }
 
-void DDaemonAudioBluetoothCard::setMode(const QString &mode)
+DExpected<void> DDaemonAudioBluetoothCard::setMode(const QString &mode)
 {
     m_inter->call("SetBluetoothAudioMode", mode);
+    QDBusReply<void> reply = m_inter->call("SetBluetoothAudioMode", mode);
+    if (!reply.isValid()) {
+        return DUnexpected<>{DError{reply.error().type(), reply.error().message()}};
+    }
+    return {};
 }
 DAUDIOMANAGER_END_NAMESPACE

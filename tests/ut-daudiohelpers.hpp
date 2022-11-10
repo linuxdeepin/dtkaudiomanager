@@ -22,8 +22,10 @@
 #include "daudiomanager_p.h"
 
 #include <QPointer>
+#include <DExpected>
 
 DAUDIOMANAGER_USE_NAMESPACE
+using DTK_CORE_NAMESPACE::DExpected;
 
 static const QString TestAudioPortName("test port");
 static const QString TestAudioPortDescription("port for testing");
@@ -114,27 +116,31 @@ public:
     }
 
 public Q_SLOTS:
-    virtual void setMute(bool mute) override
+    virtual DExpected<void> setMute(bool mute) override
     {
         if (m_mute == mute)
-            return;
+            return {};
         m_mute = mute;
         Q_EMIT muteChanged(m_mute);
+        return {};
     }
-    virtual void setFade(double fade) override
+    virtual DExpected<void> setFade(double fade) override
     {
         if (qFuzzyCompare(m_fade, fade))
-            return;
+            return {};
         m_fade = fade;
         Q_EMIT fadeChanged(m_fade);
+        return {};
     }
-    virtual void setVolume(double volume) override
+    virtual DExpected<void> setVolume(double volume) override
     {
         m_volume = volume;
+        return {};
     }
-    virtual void setBalance(double balance) override
+    virtual DExpected<void> setBalance(double balance) override
     {
         m_balance = balance;
+        return {};
     }
     virtual double meterVolume() const override
     {
@@ -217,27 +223,31 @@ public:
     }
 
 public Q_SLOTS:
-    virtual void setMute(bool mute) override
+    virtual DExpected<void> setMute(bool mute) override
     {
         if (m_mute == mute)
-            return;
+            return {};
         m_mute = mute;
         Q_EMIT muteChanged(m_mute);
+        return {};
     }
-    virtual void setFade(double fade) override
+    virtual DExpected<void> setFade(double fade) override
     {
         if (qFuzzyCompare(m_fade, fade))
-            return;
+            return {};
         m_fade = fade;
         Q_EMIT fadeChanged(m_fade);
+        return {};
     }
-    virtual void setVolume(double volume) override
+    virtual DExpected<void> setVolume(double volume) override
     {
         m_volume = volume;
+        return {};
     }
-    virtual void setBalance(double balance) override
+    virtual DExpected<void> setBalance(double balance) override
     {
         m_balance = balance;
+        return {};
     }
 
 public:
@@ -293,27 +303,31 @@ public:
     }
 
 public Q_SLOTS:
-    virtual void setMute(bool mute) override
+    virtual DExpected<void> setMute(bool mute) override
     {
         if (m_mute == mute)
-            return;
+            return {};
         m_mute = mute;
         Q_EMIT muteChanged(m_mute);
+        return {};
     }
-    virtual void setFade(double fade) override
+    virtual DExpected<void> setFade(double fade) override
     {
         if (qFuzzyCompare(m_fade, fade))
-            return;
+            return {};
         m_fade = fade;
         Q_EMIT fadeChanged(m_fade);
+        return {};
     }
-    virtual void setVolume(double volume) override
+    virtual DExpected<void> setVolume(double volume) override
     {
         m_volume = volume;
+        return {};
     }
-    virtual void setBalance(double balance) override
+    virtual DExpected<void> setBalance(double balance) override
     {
         m_balance = balance;
+        return {};
     }
 
 public:
@@ -366,27 +380,31 @@ public:
     }
 
 public Q_SLOTS:
-    virtual void setMute(bool mute) override
+    virtual DExpected<void> setMute(bool mute) override
     {
         if (m_mute == mute)
-            return;
+            return {};
         m_mute = mute;
         Q_EMIT muteChanged(m_mute);
+        return {};
     }
-    virtual void setFade(double fade) override
+    virtual DExpected<void> setFade(double fade) override
     {
         if (qFuzzyCompare(m_fade, fade))
-            return;
+            return {};
         m_fade = fade;
         Q_EMIT fadeChanged(m_fade);
+        return {};
     }
-    virtual void setVolume(double volume) override
+    virtual DExpected<void> setVolume(double volume) override
     {
         m_volume = volume;
+        return {};
     }
-    virtual void setBalance(double balance) override
+    virtual DExpected<void> setBalance(double balance) override
     {
         m_balance = balance;
+        return {};
     }
 
 public:
@@ -427,13 +445,15 @@ public:
     }
 
 public slots:
-    virtual void setIncreaseVolume(bool increaseVolume) override
+    virtual DExpected<void> setIncreaseVolume(bool increaseVolume) override
     {
         m_increaseVolume = increaseVolume;
+        return {};
     }
-    virtual void setReduceNoise(bool reduceNoise) override
+    virtual DExpected<void> setReduceNoise(bool reduceNoise) override
     {
         m_reduceNoise = reduceNoise;
+        return {};
     }
 
 public:

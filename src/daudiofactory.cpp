@@ -13,8 +13,10 @@
 #include <QPluginLoader>
 #include <QJsonArray>
 #include <QLoggingCategory>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DTK_CORE_NAMESPACE::DExpected;
 Q_DECLARE_LOGGING_CATEGORY(amLog)
 
 class DAudioPluginLoader
@@ -183,11 +185,11 @@ public:
     }
 
 public slots:
-    virtual void setIncreaseVolume(bool increaseVolume) override
+    virtual DExpected<void> setIncreaseVolume(bool increaseVolume) override
     {
         Q_UNUSED(increaseVolume);
     }
-    virtual void setReduceNoise(bool reduceNoise) override
+    virtual DExpected<void> setReduceNoise(bool reduceNoise) override
     {
         Q_UNUSED(reduceNoise);
     }

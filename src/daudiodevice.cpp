@@ -140,24 +140,28 @@ bool DAudioDevice::isPlay() const
     return d->isPlay();
 }
 
-void DAudioDevice::setMute(bool mute)
+DExpected<void> DAudioDevice::setMute(bool mute)
 {
     d->setMute(mute);
+    return {};
 }
 
-void DAudioDevice::setFade(double fade)
+DExpected<void> DAudioDevice::setFade(double fade)
 {
     d->setFade(fade);
+    return {};
 }
 
-void DAudioDevice::setVolume(double volume)
+DExpected<void> DAudioDevice::setVolume(double volume)
 {
     d->setVolume(volume);
+    return {};
 }
 
-void DAudioDevice::setBalance(double balance)
+DExpected<void> DAudioDevice::setBalance(double balance)
 {
     d->setBalance(balance);
+    return {};
 }
 
 void DAudioDevice::setIsPlay(bool isPlay)

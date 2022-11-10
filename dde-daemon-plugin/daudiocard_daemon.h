@@ -6,12 +6,15 @@
 #define DAUDIOCARD_DAEMON_H
 
 #include "daudiocard_p.h"
-#include "dbus/ddbusinterface.h"
 
 #include <QDBusInterface>
 #include <QObject>
+#include <DDBusInterface>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DTK_CORE_NAMESPACE::DDBusInterface;
+
 class DPlatformAudioPort;
 class DDaemonAudioCard : public DPlatformAudioCard
 {
@@ -35,7 +38,7 @@ public:
     QStringList modeOptions() const;
 
 public Q_SLOTS:
-    void setMode(const QString &mode);
+    DExpected<void> setMode(const QString &mode);
 
 Q_SIGNALS:
     void modeChanged(const QString &mode);

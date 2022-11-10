@@ -9,10 +9,14 @@
 #include "daudiodevice.h"
 #include "daudiocard_p.h"
 #include "daudiostream_p.h"
+#include "dtkcore_global.h"
 
 #include <QObject>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+DCORE_USE_NAMESPACE
+
 class DPlatformAudioDevice : public QObject, public QSharedData
 {
     Q_OBJECT
@@ -51,10 +55,10 @@ public:
     void setDescription(const QString &description);
 
 public Q_SLOTS:
-    virtual void setMute(bool mute) = 0;
-    virtual void setFade(double fade) = 0;
-    virtual void setVolume(double volume) = 0;
-    virtual void setBalance(double balance) = 0;
+    virtual DExpected<void> setMute(bool mute) = 0;
+    virtual DExpected<void> setFade(double fade) = 0;
+    virtual DExpected<void> setVolume(double volume) = 0;
+    virtual DExpected<void> setBalance(double balance) = 0;
 
 Q_SIGNALS:
     void streamAdded(const QString &name);

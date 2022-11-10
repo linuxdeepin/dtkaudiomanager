@@ -6,11 +6,14 @@
 #define DAUDIOSTREAM_H
 
 #include <dtkaudiomanager_global.h>
+#include <dexpected.h>
 
 #include <QObject>
 #include <QSharedDataPointer>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+using DCORE_NAMESPACE::DExpected;
+
 class DAudioDevice;
 class DPlatformAudioStream;
 class LIBDTKAUDIOMANAGERSHARED_EXPORT DAudioStream : public QObject
@@ -42,10 +45,10 @@ public:
     bool isPlay() const;
     void setIsPlay(bool isPlay);
 public Q_SLOTS:
-    virtual void setMute(bool mute);
-    virtual void setFade(double fade);
-    virtual void setVolume(double volume);
-    virtual void setBalance(double balance);
+    virtual DExpected<void> setMute(bool mute);
+    virtual DExpected<void> setFade(double fade);
+    virtual DExpected<void> setVolume(double volume);
+    virtual DExpected<void> setBalance(double balance);
 
 Q_SIGNALS:
     void muteChanged(bool mute);

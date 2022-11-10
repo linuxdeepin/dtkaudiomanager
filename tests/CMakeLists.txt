@@ -43,14 +43,14 @@ add_executable(${BIN_NAME}
 )
 
 target_include_directories(${BIN_NAME} PUBLIC
-    Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::DBus
+    ${DtkCore_INCLUDE_DIRS}
 )
 
 target_link_libraries(${BIN_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::DBus
     Qt${QT_VERSION_MAJOR}::Test
+    ${DtkCore_LIBRARIES}
     -lpthread
     -lgcov
     -lgtest

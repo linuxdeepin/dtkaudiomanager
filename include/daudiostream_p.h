@@ -9,8 +9,11 @@
 #include "dtkaudiomanager_global.h"
 
 #include <QObject>
+#include <DExpected>
 
 DAUDIOMANAGER_BEGIN_NAMESPACE
+DCORE_USE_NAMESPACE
+
 class DAudioDevice;
 class DPlatformAudioDevice;
 class DPlatformAudioInputDevice;
@@ -44,10 +47,10 @@ public:
     bool isPlay() const;
     void setIsPlay(bool isPlay);
 public Q_SLOTS:
-    virtual void setMute(bool mute) = 0;
-    virtual void setFade(double fade) = 0;
-    virtual void setVolume(double volume) = 0;
-    virtual void setBalance(double balance) = 0;
+    virtual DExpected<void> setMute(bool mute) = 0;
+    virtual DExpected<void> setFade(double fade) = 0;
+    virtual DExpected<void> setVolume(double volume) = 0;
+    virtual DExpected<void> setBalance(double balance) = 0;
 
 Q_SIGNALS:
     void muteChanged(bool mute);
