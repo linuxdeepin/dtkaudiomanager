@@ -25,6 +25,9 @@ DAudioPort 中定义了音频端口对象的接口。
 @property DAudioPort::isEnabled
 @brief 端口是否可用
 
+@property DAudioPort::available
+@brief 端口是否可以使用
+
 @fn void DAudioPort::directionChanged(int direction)
 @brief 端口方向
 @param [in] direction 端口方向
@@ -60,5 +63,9 @@ DAudioPort 中定义了音频端口对象的接口。
 @fn void DAudioPort::setEnabled(const bool enabled)
 @brief 设置是否启用此端口
 @param [in] enabled 是否启用
+
+@fn bool DAudioPort::available() const
+@brief 端口是否可用
+@return 端口是否可用
 
 */

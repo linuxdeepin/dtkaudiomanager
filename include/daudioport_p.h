@@ -22,9 +22,12 @@ public:
     virtual ~DPlatformAudioPort();
     virtual bool isEnabled() const;
     virtual void setEnabled(const bool enabled);
+    virtual bool available() const;
+    virtual void setAvailable(const bool available);
 
     virtual bool isActive() const;
     virtual void setActive(const int active);
+
     int direction() const;
     void setDirection(const int direction);
     QString name() const;
@@ -41,12 +44,14 @@ Q_SIGNALS:
     void nameChanged(QString name);
     void descriptionChanged(QString description);
     void enabledChanged(bool enabled);
+    void availableChanged(bool available);
 
 protected:
     DPlatformAudioCard *m_card = nullptr;
     int m_direction = 1;
     bool m_isActive = false;
     bool m_isEnabled = false;
+    bool m_available;
     QString m_name;
     QString m_description;
 };

@@ -51,6 +51,8 @@ private Q_SLOTS:
     void onPortEnableChanged(quint32 cardIndex, const QString &portName, bool enabled);
 private:
     void updateCards();
+    void updateAvailableOfCardPort();
+    QMap<quint32, QStringList> availableCardAndPorts() const;
     void updateInputDevice();
     void updateOutputDevice();
     void updateOutputStream();

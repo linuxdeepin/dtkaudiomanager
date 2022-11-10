@@ -210,7 +210,7 @@ void DAudioManagerPrivate::addCard(DPlatformAudioCard *card)
 void DAudioManagerPrivate::removeCard(const quint32 cardId)
 {
     for (auto item : m_cards) {
-        if (item->name() == cardId) {
+        if (item->id() == cardId) {
             m_cards.removeOne(item);
             Q_EMIT cardsChanged();
             break;

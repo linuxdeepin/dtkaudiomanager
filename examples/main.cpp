@@ -241,6 +241,12 @@ struct MonitorCards : public Command
             m_cards = m_handler.cards();
             print(m_cards);
         });
+        QObject::connect(&m_handler, &DAudioManager::deviceAdded, [](const QString &name, const bool isInputDevice) {
+            qInfo() << "deviceAdded" << name << isInputDevice;
+        });
+        QObject::connect(&m_handler, &DAudioManager::deviceRemoved, [](const QString &name, const bool isInputDevice) {
+            qInfo() << "deviceRemoved" << name << isInputDevice;
+        });
         return false;
     }
     void print(const QList<DAudioCardPtr> &cards)
@@ -248,6 +254,9 @@ struct MonitorCards : public Command
         qInfo() << "card info:";
         for (auto item : cards) {
             qInfo() << item->name();
+            for (auto port : item->ports()) {
+                qInfo() << port->name() << port->description() << port->direction() << port->available();
+            }
         }
     }
     QList<DAudioCardPtr> m_cards;

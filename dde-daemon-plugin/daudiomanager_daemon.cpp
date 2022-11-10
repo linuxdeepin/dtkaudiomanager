@@ -158,10 +158,9 @@ void DDaemonAudioManager::updateCards()
         const QString cardName = jCard["Name"].toString();
         QJsonArray jPorts = jCard["Ports"].toArray();
 
+        newCards << cardId;
         if (cardById(cardId))
             continue;
-
-        newCards << cardId;
 
         bool isBluetooth = false;
         for (QJsonValue pV : jPorts) {
@@ -179,23 +178,63 @@ void DDaemonAudioManager::updateCards()
 
         for (QJsonValue pV : jPorts) {
             QJsonObject jPort = pV.toObject();
-            const double portAvai = jPort["Available"].toDouble();
-            const bool aviablee = (portAvai == 2.0 || portAvai == 0.0);// 0 Unknown 1 Not available 2 Available
             const QString portName = jPort["Name"].toString();
             const QString portDescription = jPort["Description"].toString();
             const bool isEnabled = jPort["Enabled"].toBool();
             const int direction = jPort["Direction"].toInt();
 
             auto port = new DDaemonAudioPort(card);
-            port->DPlatformAudioPort::setActive(aviablee);
             port->DPlatformAudioPort::setEnabled(isEnabled);
             port->setDirection(direction);
             port->setName(portName);
             port->setDescription(portDescription);
         }
-        addCard(card);
+        m_cards.append(QExplicitlySharedDataPointer(card));
     }
     compareAndDestroyCards(newCards);
+    updateAvailableOfCardPort();
+
+    Q_EMIT cardsChanged();
+}
+
+void DDaemonAudioManager::updateAvailableOfCardPort()
+{
+    const auto &cardPorts = availableCardAndPorts();
+    for (auto card : m_cards) {
+        const auto cardId = card->id();
+        bool existAvailableCard = cardPorts.contains(cardId);
+        for (auto port : card->ports()) {
+            const auto avaiable = existAvailableCard && cardPorts[cardId].contains(port->name());
+            port->DPlatformAudioPort::setAvailable(avaiable);
+        }
+    }
+}
+
+QMap<quint32, QStringList> DDaemonAudioManager::availableCardAndPorts() const
+{
+    QMap<quint32, QStringList> result;
+    const QString &replyValue = qdbus_cast<QString>(m_inter->property("CardsWithoutUnavailable"));
+    if (m_inter->lastError().isValid()) {
+        qWarning() << Q_FUNC_INFO << m_inter->lastError();
+        return result;
+    }
+
+    QJsonDocument doc = QJsonDocument::fromJson(replyValue.toUtf8());
+    QJsonArray jCards = doc.array();
+    for (QJsonValue cV : jCards) {
+        QJsonObject jCard = cV.toObject();
+        const uint cardId = static_cast<uint>(jCard["Id"].toInt());
+        QStringList &ports = result[cardId];
+
+        QJsonArray jPorts = jCard["Ports"].toArray();
+
+        for (QJsonValue pV : jPorts) {
+            QJsonObject jPort = pV.toObject();
+            const QString portName = jPort["Name"].toString();
+            ports << portName;
+        }
+    }
+    return result;
 }
 
 void DDaemonAudioManager::updateInputDevice()

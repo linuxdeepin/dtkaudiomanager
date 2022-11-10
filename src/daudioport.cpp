@@ -20,6 +20,7 @@ DAudioPort::DAudioPort(DPlatformAudioPort *d)
     connect(d, &DPlatformAudioPort::nameChanged, this, &DAudioPort::nameChanged);
     connect(d, &DPlatformAudioPort::descriptionChanged, this, &DAudioPort::descriptionChanged);
     connect(d, &DPlatformAudioPort::enabledChanged, this, &DAudioPort::enabledChanged);
+    connect(d, &DPlatformAudioPort::availableChanged, this, &DAudioPort::availableChanged);
 }
 
 DAudioPort::~DAudioPort()
@@ -30,6 +31,11 @@ DAudioPort::~DAudioPort()
 void DAudioPort::setEnabled(const bool enabled)
 {
     d->setEnabled(enabled);
+}
+
+bool DAudioPort::available() const
+{
+    return d->available();
 }
 
 bool DAudioPort::isEnabled() const
@@ -75,6 +81,16 @@ void DPlatformAudioPort::setEnabled(const bool enabled)
         return;
     m_isEnabled = enabled;
     Q_EMIT enabledChanged(m_isEnabled);
+}
+
+bool DPlatformAudioPort::available() const
+{
+    return m_available;
+}
+
+void DPlatformAudioPort::setAvailable(const bool available)
+{
+    m_available = available;
 }
 
 bool DPlatformAudioPort::isActive() const
