@@ -33,4 +33,8 @@ Files: dde-daemon-plugin/daemonaudio.json
 copyright: UnionTech Software Technology Co., Ltd.
 License: LGPL-3.0-or-later
 
+#doxygentheme
+Files: doxygentheme/*
+Copyright: Copyright (c) 2021 - 2022 jothepro
+License: MIT
 
