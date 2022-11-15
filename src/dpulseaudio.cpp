@@ -1,6 +1,9 @@
 #include "dpulseaudio.h"
 
+#include <QLoggingCategory>
 DAUDIOMANAGER_BEGIN_NAMESPACE
+
+Q_DECLARE_LOGGING_CATEGORY(amLog)
 
 DPlatformAudioPort::DPlatformAudioPort(DPlatformAudioCard *card)
     : m_card(card)
@@ -180,6 +183,7 @@ void DAudioManagerPrivate::onContextStateChange(pa_context *c, void *userData)
         break;
 
     case PA_CONTEXT_READY: {
+        qDebug(amLog()) << "contextState Ready";
         pa_operation_unref(
                     pa_context_get_card_info_list(
                         manager->context, &DAudioManagerPrivate::cardList, manager));
@@ -229,7 +233,7 @@ void DAudioManagerPrivate::processCardEvent(int event, uint32_t idx, DAudioManag
         pa_operation_unref(
                     pa_context_get_card_info_by_index(
                         manager->context, idx, &DAudioManagerPrivate::onCardInfo, manager));
-        qDebug() << "card add";
+        qDebug(amLog()) << "card add" << idx;
     } break;
 
     case PA_SUBSCRIPTION_EVENT_CHANGE: {
@@ -240,11 +244,11 @@ void DAudioManagerPrivate::processCardEvent(int event, uint32_t idx, DAudioManag
         pa_operation_unref(
                     pa_context_get_card_info_by_index(
                         manager->context, idx, &DPlatformAudioCard::update, card));
-        qDebug() << "card change";
+        qDebug(amLog()) << "card change" << idx;
     } break;
 
     case PA_SUBSCRIPTION_EVENT_REMOVE: {
-        qDebug() << "card remove";
+        qDebug(amLog()) << "card remove" << idx;
         manager->removeCard(idx);
     } break;
     }

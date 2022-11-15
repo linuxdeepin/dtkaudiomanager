@@ -38,14 +38,15 @@ set_target_properties(${BIN_NAME} PROPERTIES
 
 target_compile_definitions(${BIN_NAME} PRIVATE VERSION="${CMAKE_PROJECT_VERSION}")
 
+find_package(PulseAudio)
+
 target_include_directories(${BIN_NAME} PUBLIC
-    ${DtkCore_INCLUDE_DIRS}
+    ${PULSEAUDIO_INCLUDE_DIR}
 )
 
 target_link_libraries(${BIN_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::DBus
-    ${DtkCore_LIBRARIES}
+    ${PULSEAUDIO_LIBRARY}
 )
 
 install(FILES ${INCLUDE_FILES} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${BIN_NAME})
