@@ -1,28 +1,27 @@
-Source: dtkaudiomanager
+Source: audiomanager
 Section: libdevel
 Priority: optional
 Maintainer: Packages Builder <packages@deepin.com>
 Build-Depends:
  debhelper-compat (= 12),
  cmake,
- doxygen,
- qhelpgenerator-qt5 | qttools5-dev-tools,
  qtbase5-dev,
- libdtkcore-dev
+ libpulse-dev,
+ libpulse0
 Standards-Version: 4.5.0
 
-Package: libdtkaudiomanager
+Package: libaudiomanager
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Deepin Tool Kit template library
- libdtkaudiomanager is base library of Deepin Qt/C++ applications.
+ libaudiomanager is base library of Deepin Qt/C++ applications.
  .
  This package contains the shared libraries.
 
-Package: libdtkaudiomanager-dev
+Package: libaudiomanager-dev
 Architecture: any
-Depends:${misc:Depends}, libdtkaudiomanager( =${binary:Version})
+Depends:${misc:Depends}, libaudiomanager( =${binary:Version})
 Description: Deepin Tool Kit template devel library
- libdtkaudiomanager-dev is base devel library of Deepin Qt/C++ applications.
+ libaudiomanager-dev is base devel library of Deepin Qt/C++ applications.
  .
  This package contains the header files and static libraries.

@@ -6,7 +6,7 @@ set(BIN_NAME ${CMAKE_PROJECT_NAME})
 
 file(GLOB_RECURSE INCLUDE_FILES
     "../include/DAudioManager"
-    "../include/dtkaudiomanager_global.h"
+    "../include/audiomanager_global.h"
     "../include/daudioport.h"
     "../include/daudiocard.h"
     "../include/daudiomanager.h"
@@ -30,7 +30,7 @@ add_library(${BIN_NAME} SHARED
 
 include_directories(../include)
 
-add_definitions(-DLIBDTKAUDIOMANAGER_LIBRARY)
+add_definitions(-DLIBAUDIOMANAGER_LIBRARY)
 
 set_target_properties(${BIN_NAME} PROPERTIES
     VERSION ${CMAKE_PROJECT_VERSION}

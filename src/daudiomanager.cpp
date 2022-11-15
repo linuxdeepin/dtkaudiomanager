@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QLoggingCategory>
 
-DAUDIOMANAGER_BEGIN_NAMESPACE
+AUDIOMANAGER_BEGIN_NAMESPACE
 
 // daudiomanager log category
 #ifndef QT_DEBUG
@@ -58,4 +58,4 @@ bool DAudioManager::ready() const
 {
     return d->m_ready;
 }
-DAUDIOMANAGER_END_NAMESPACE
+AUDIOMANAGER_END_NAMESPACE

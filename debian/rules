@@ -10,3 +10,5 @@ PACK_VER = $(shell echo $(VERSION) | awk -F'[+_~-]' '{print $$1}')
 override_dh_auto_configure:
 	dh_auto_configure -- -DVERSION=$(PACK_VER)
 
+override_dh_shlibdeps:
+	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info

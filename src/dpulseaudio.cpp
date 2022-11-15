@@ -1,7 +1,7 @@
 #include "dpulseaudio.h"
 
 #include <QLoggingCategory>
-DAUDIOMANAGER_BEGIN_NAMESPACE
+AUDIOMANAGER_BEGIN_NAMESPACE
 
 Q_DECLARE_LOGGING_CATEGORY(amLog)
 
@@ -277,4 +277,4 @@ void DAudioManagerPrivate::cardList(pa_context *context, const pa_card_info *car
     onCardInfo(context, cardInfo, eol, userData);
 }
 
-DAUDIOMANAGER_END_NAMESPACE
+AUDIOMANAGER_END_NAMESPACE

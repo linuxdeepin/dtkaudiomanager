@@ -15,8 +15,8 @@
 ### 从源代码构建
 
 ```bash
-git clone https://github.com/linuxdeepin/dtkaudiomanager.git
-cd dtkaudiomanager
+git clone https://github.com/linuxdeepin/audiomanager.git
+cd audiomanager
 cmake -B build -DCMAKE_INSTALL_PREFIX=/usr
 cmake --build build
 ```

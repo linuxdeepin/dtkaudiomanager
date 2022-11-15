@@ -7,7 +7,7 @@
 
 #include <QDebug>
 
-DAUDIOMANAGER_BEGIN_NAMESPACE
+AUDIOMANAGER_BEGIN_NAMESPACE
 
 DAudioPort::DAudioPort(DPlatformAudioPort *d)
     :d(d)
@@ -40,4 +40,4 @@ QString DAudioPort::description() const
     return d->m_description;
 }
 
-DAUDIOMANAGER_END_NAMESPACE
+AUDIOMANAGER_END_NAMESPACE

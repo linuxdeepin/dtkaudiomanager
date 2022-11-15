@@ -10,7 +10,7 @@
 #include <QTime>
 #include <QTimer>
 
-DAUDIOMANAGER_USE_NAMESPACE;
+AUDIOMANAGER_USE_NAMESPACE;
 void printCard(const DAudioCard *card)
 {
     qInfo() << card->name() << card->id();

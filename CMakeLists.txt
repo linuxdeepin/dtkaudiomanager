@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.13)
 # If do't define version number, specify the version number
 set (VERSION "1.0.0" CACHE STRING "define project version")
 
-set(BIN_NAME dtkaudiomanager)
+set(BIN_NAME audiomanager)
 
 project(${BIN_NAME}
     LANGUAGES CXX

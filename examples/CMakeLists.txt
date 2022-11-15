@@ -2,14 +2,14 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-PROJECT(dtkaudiomanager-example)
+PROJECT(audiomanager-example)
 file(GLOB_RECURSE SRCS "main.cpp"
     "../src/*.cpp"
 )
 
 set(EXECUTABLE_OUTPUT_PATH ../)
 include_directories("../include")
-add_executable(dtkaudiomanager-example
+add_executable(audiomanager-example
     ${SRCS}
 )
 

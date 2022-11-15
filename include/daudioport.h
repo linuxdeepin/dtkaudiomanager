@@ -5,14 +5,14 @@
 #ifndef DAUDIOPORT_H
 #define DAUDIOPORT_H
 
-#include <dtkaudiomanager_global.h>
+#include <audiomanager_global.h>
 
 #include <QObject>
 #include <QPointer>
 
-DAUDIOMANAGER_BEGIN_NAMESPACE
+AUDIOMANAGER_BEGIN_NAMESPACE
 class DPlatformAudioPort;
-class LIBDTKAUDIOMANAGERSHARED_EXPORT DAudioPort : public QObject
+class LIBAUDIOMANAGERSHARED_EXPORT DAudioPort : public QObject
 {
     Q_OBJECT
 
@@ -30,6 +30,6 @@ public:
     friend class DPlatformAudioPort;
     QExplicitlySharedDataPointer<DPlatformAudioPort> d;
 };
-DAUDIOMANAGER_END_NAMESPACE
+AUDIOMANAGER_END_NAMESPACE
 
 #endif

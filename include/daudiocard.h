@@ -5,17 +5,17 @@
 #ifndef DAUDIOCARD_H
 #define DAUDIOCARD_H
 
-#include <dtkaudiomanager_global.h>
+#include <audiomanager_global.h>
 #include <daudioport.h>
 
 #include <QObject>
 #include <QSharedPointer>
 
-DAUDIOMANAGER_BEGIN_NAMESPACE
+AUDIOMANAGER_BEGIN_NAMESPACE
 class DAudioPort;
 class DPlatformAudioCard;
 using DAudioPortPtr = QSharedPointer<DAudioPort>;
-class LIBDTKAUDIOMANAGERSHARED_EXPORT DAudioCard : public QObject
+class LIBAUDIOMANAGERSHARED_EXPORT DAudioCard : public QObject
 {
     Q_OBJECT
 public:
@@ -34,6 +34,6 @@ protected:
     QExplicitlySharedDataPointer<DPlatformAudioCard> d;
 };
 
-DAUDIOMANAGER_END_NAMESPACE
+AUDIOMANAGER_END_NAMESPACE
 
 #endif

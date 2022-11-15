@@ -16,7 +16,7 @@
 #include <QDebug>
 #include <QThread>
 
-DAUDIOMANAGER_BEGIN_NAMESPACE
+AUDIOMANAGER_BEGIN_NAMESPACE
 
 class DPlatformAudioCard;
 class DPlatformAudioPort : public QSharedData
@@ -116,4 +116,4 @@ public:
     bool m_ready = false;
 };
 
-DAUDIOMANAGER_END_NAMESPACE
+AUDIOMANAGER_END_NAMESPACE

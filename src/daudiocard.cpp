@@ -9,7 +9,7 @@
 
 #include <QDebug>
 
-DAUDIOMANAGER_BEGIN_NAMESPACE
+AUDIOMANAGER_BEGIN_NAMESPACE
 
 DAudioCard::DAudioCard(DPlatformAudioCard *d)
     : d(d)
@@ -57,4 +57,4 @@ bool DAudioCard::available() const
     return d->m_available;
 }
 
-DAUDIOMANAGER_END_NAMESPACE
+AUDIOMANAGER_END_NAMESPACE
