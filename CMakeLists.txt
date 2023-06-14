@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 # If do't define version number, specify the version number
-set (VERSION "1.0.0" CACHE STRING "define project version")
+set (DTK_VERSION "5.0.0" CACHE STRING "define project version")
 
 set(BIN_NAME dtkaudiomanager)
 
@@ -13,8 +13,23 @@ project(${BIN_NAME}
     LANGUAGES CXX
     HOMEPAGE_URL https://github.com/linuxdeepin/dtkaudiomanager
     DESCRIPTION "Qt-based development library for audio manager on Deepin"
-    VERSION ${VERSION}
+    VERSION ${DTK_VERSION}
 )
+if (${CMAKE_PROJECT_VERSION_MAJOR} STREQUAL "5")
+    set(QT_DEFAULT_MAJOR_VERSION "5")
+    set(DTK_DEFAULT_MAJOR_VERSION "")
+    set(DTK_VERSION_MAJOR "")
+    set(EnableDtk5 on)
+    set(EnableDtk6 off)
+elseif(${CMAKE_PROJECT_VERSION_MAJOR} STREQUAL "6")
+    set(QT_DEFAULT_MAJOR_VERSION "6")
+    set(DTK_DEFAULT_MAJOR_VERSION "6")
+    set(DTK_VERSION_MAJOR "6")
+    set(EnableDtk5 off)
+    set(EnableDtk6 on)
+else()
+    message(FATAL_ERROR "Only support DTK_VERSION is 5 or 6")
+endif()
 
 # specify install dir
 include(GNUInstallDirs)
@@ -41,9 +56,9 @@ else ()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Ofast")
 endif ()
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+find_package(QT NAMES Qt${QT_DEFAULT_MAJOR_VERSION} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core DBus)
-find_package(Dtk REQUIRED COMPONENTS Core)
+find_package(Dtk${DTK_VERSION_MAJOR}Core REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(dde-daemon-plugin)
