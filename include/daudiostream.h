@@ -26,7 +26,7 @@ class LIBDTKAUDIOMANAGERSHARED_EXPORT DAudioStream : public QObject
     Q_PROPERTY(double balance READ balance WRITE setBalance NOTIFY balanceChanged)
     Q_PROPERTY(bool supportBalance READ supportBalance NOTIFY supportBalanceChanged)
     Q_PROPERTY(bool supportFade READ supportFade NOTIFY supportFadeChanged)
-    Q_PROPERTY(QString card READ card NOTIFY cardChanged)
+    Q_PROPERTY(quint32 card READ card NOTIFY cardChanged)
     Q_PROPERTY(bool isPlay READ isPlay WRITE setIsPlay NOTIFY isPlayChanged)
 public:
     explicit DAudioStream(DPlatformAudioStream *d, DAudioDevice *parent = nullptr);
@@ -59,7 +59,7 @@ Q_SIGNALS:
     void supportBalanceChanged(bool supportBalance);
     void supportFadeChanged(bool supportFade);
 
-    void cardChanged(QString card);
+    void cardChanged(quint32 card);
     void isPlayChanged(bool isPlay);
 
 private:

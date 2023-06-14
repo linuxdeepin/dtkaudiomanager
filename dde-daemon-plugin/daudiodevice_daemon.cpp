@@ -20,9 +20,9 @@ using DTK_CORE_NAMESPACE::DError;
 
 static void registDBusStructInfo()
 {
-    qDebug() << qRegisterMetaType<DAudioPortInfo_p>("DAudioPortInfo_p");
-    qDebug() << qDBusRegisterMetaType<DAudioPortInfo_p>();
-    qDebug() << qDBusRegisterMetaType<QList<DAudioPortInfo_p>>();
+    qRegisterMetaType<DAudioPortInfo_p>("DAudioPortInfo_p");
+    qDBusRegisterMetaType<DAudioPortInfo_p>();
+    qDBusRegisterMetaType<QList<DAudioPortInfo_p>>();
 }
 Q_CONSTRUCTOR_FUNCTION(registDBusStructInfo)
 

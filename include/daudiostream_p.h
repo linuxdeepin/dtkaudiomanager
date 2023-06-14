@@ -28,7 +28,7 @@ class DPlatformAudioStream : public QObject, public QSharedData
     Q_PROPERTY(double balance READ balance WRITE setBalance NOTIFY balanceChanged)
     Q_PROPERTY(bool supportBalance READ supportBalance NOTIFY supportBalanceChanged)
     Q_PROPERTY(bool supportFade READ supportFade NOTIFY supportFadeChanged)
-    Q_PROPERTY(QString card READ card NOTIFY cardChanged)
+    Q_PROPERTY(quint32 card READ card NOTIFY cardChanged)
 public:
     explicit DPlatformAudioStream(DPlatformAudioDevice *parent = nullptr);
     virtual bool mute() const = 0;
@@ -61,7 +61,7 @@ Q_SIGNALS:
     void supportBalanceChanged(bool supportBalance);
     void supportFadeChanged(bool supportFade);
 
-    void cardChanged(QString card);
+    void cardChanged(quint32 card);
 
 protected:
     QString m_name;
